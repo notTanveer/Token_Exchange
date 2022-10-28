@@ -5,9 +5,7 @@ async function main() {
     console.log(`Deployed Token to: ${token.address}`)
 }
 
-main()
-.then(() => process.exit(0))
-.catch((error) => {
+main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
