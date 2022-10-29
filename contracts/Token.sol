@@ -9,9 +9,12 @@ contract Token {
     uint256 public decimals = 18; //uint is basically unsigned integer which means its not negative
     uint256 public totalSupply;
 
-    mapping(address => uint256) public balanceOf; //mapping function helps us to read and write value using balanceOf. Which is used to track balances! 
+    mapping(address => uint256) public balanceOf; //mapping function helps us to read and write value using balanceOf. Which is used to track balances!(key value pair) 
+    mapping(address => mapping(address => uint256)) public allowance;
 
     event Transfer(address indexed from, address indexed to, uint256 value);
+
+    event Approval(address indexed owner, address indexed spender, uint256 value);
 
     constructor(string memory _name, string memory _symbol, uint _totalSupply) {
 
@@ -32,5 +35,14 @@ contract Token {
     emit Transfer(_to, msg.sender, _value);
     return true;
 
+    }
+
+    function approve(address _spender, uint256 _value) public returns(bool success) {
+        require(_spender != address(0));
+
+        allowance[msg.sender][_spender] = _value;
+
+        emit Approval(msg.sender, _spender, _value);
+        return true;
     }
 }
