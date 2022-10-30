@@ -47,23 +47,23 @@ describe('Token', () =>{
         const decimals = '18'
         const totalSupply = tokens('1000000')
 
-    it('has correct name', async () => {
+    it('Has Correct Name', async () => {
        expect(await token.name()).to.equal(name)
     })
 
-    it('has correct symbol', async () => {
+    it('Has Correct Symbol', async () => {
         expect(await token.symbol()).to.equal(symbol)
     })
 
-    it('has correct decimals', async () => {
+    it('Has Correct Decimals', async () => {
         expect(await token.decimals()).to.equal(decimals)
     })
 
-    it('has correct supply', async () => {
+    it('Has Correct Supply', async () => {
         expect(await token.totalSupply()).to.equal(totalSupply)
     })
 
-    it('assigns total supply to deployer', async () => {
+    it('Assigns Total Supply to Deployer', async () => {
         expect(await token.balanceOf(deployer.address)).to.equal(totalSupply)
     })
 })
