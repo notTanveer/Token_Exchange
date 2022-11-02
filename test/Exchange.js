@@ -6,7 +6,7 @@ const tokens = (n) => {
 }
 
 describe('Exchange', () => {
-  let deployer, feeAccount, exchange, token1, token2
+  let deployer, feeAccount, exchange
 
   const feePercent = 10
 
@@ -14,7 +14,7 @@ describe('Exchange', () => {
     const Exchange = await ethers.getContractFactory('Exchange')
     const Token = await ethers.getContractFactory('Token')
 
-    token1 = await Token.deploy('Sahil', 'SHL', '1000000')
+    token1 = await Token.deploy('Dapp University', 'DAPP', '1000000')
     token2 = await Token.deploy('Mock Dai', 'mDAI', '1000000')
 
     accounts = await ethers.getSigners()
@@ -327,17 +327,17 @@ describe('Exchange', () => {
         })
 
         it('rejects already filled orders', async () => {
-          transaction = await exchange.connect(user2).fillOrder(1) //order filled
+          transaction = await exchange.connect(user2).fillOrder(1)
           await transaction.wait()
 
-          await expect(exchange.connect(user2).fillOrder(1)).to.be.reverted //reverting already filled order
+          await expect(exchange.connect(user2).fillOrder(1)).to.be.reverted
         })
 
         it('Rejects canceled orders', async () => {
-          transaction = await exchange.connect(user1).cancelOrder(1)   //cancel order
+          transaction = await exchange.connect(user1).cancelOrder(1)
           await transaction.wait()
 
-          await expect(exchange.connect(user2).fillOrder(1)).to.be.reverted //revert already cancelled order
+          await expect(exchange.connect(user2).fillOrder(1)).to.be.reverted
         })
 
       })

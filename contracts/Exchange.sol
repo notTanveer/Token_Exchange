@@ -54,7 +54,6 @@ contract Exchange {
         uint256 timestamp
     );
 
-
     struct _Order {
         // Attributes of an order
         uint256 id; // Unique identifier for order
@@ -111,6 +110,7 @@ contract Exchange {
 
     // ------------------------
     // MAKE & CANCEL ORDERS
+
     function makeOrder(
         address _tokenGet,
         uint256 _amountGet,
@@ -121,7 +121,7 @@ contract Exchange {
         require(balanceOf(_tokenGive, msg.sender) >= _amountGive);
 
         // Instantiate a new order
-        orderCount = orderCount + 1;
+        orderCount ++;
         orders[orderCount] = _Order(
             orderCount,
             msg.sender,
@@ -169,6 +169,7 @@ contract Exchange {
         );
     }
 
+
     // ------------------------
     // EXECUTING ORDERS
 
@@ -213,7 +214,7 @@ contract Exchange {
         // msg.sender is the user who filled the order, while _user is who created the order
         tokens[_tokenGet][msg.sender] =
             tokens[_tokenGet][msg.sender] -
-            (_amountGet + _feeAmount);          //charge fees from who fills the order
+            (_amountGet + _feeAmount);
 
         tokens[_tokenGet][_user] = tokens[_tokenGet][_user] + _amountGet;
 
