@@ -8,7 +8,7 @@ async function main() {
   // Fetch accounts
   const accounts = await ethers.getSigners()
 
-  console.log(`Accounts fetched:\n${accounts[0].address}\n${accounts[1].address}\n`)
+  console.log(`Accounts fetched:\n${accounts[0].address}\n${accounts[1].address}\n`)//"\n means new line"
 
   // Deploy contracts
   const dapp = await Token.deploy('Dapp University', 'DAPP', '1000000')
