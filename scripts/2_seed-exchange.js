@@ -115,7 +115,6 @@ async function main() {
   console.log(`Filled order from ${user1.address}\n`)
 
   // Wait 1 second
-  await wait(1)
 
   // User 1 makes final order
   transaction = await exchange.connect(user1).makeOrder(mETH.address, tokens(200), DApp.address, tokens(20))
@@ -143,7 +142,7 @@ async function main() {
     console.log(`Made order from ${user1.address}`)
 
     // Wait 1 second
-    await wait(1)
+
   }
 
   // User 2 makes 10 orders
@@ -154,7 +153,6 @@ async function main() {
     console.log(`Made order from ${user2.address}`)
 
     // Wait 1 second
-    await wait(1)
   }
 
 }
