@@ -10,6 +10,8 @@ import {
   loadExchange
 } from '../store/interactions';
 
+import Navbar from './Navbar'
+
 function App() {
   const dispatch = useDispatch()
 
@@ -22,8 +24,10 @@ function App() {
     const chainId = await loadNetwork(provider, dispatch)
 
     // Fetch current account and balance from Metamask 
-    await loadAccount(provider, dispatch)
-
+    window.ethereum.on('accountsChanged', () => {
+      loadAccount(provider, dispatch)
+    })
+     
     // Token Smart Contract
     const DApp = config[chainId].DApp
     const mETH = config[chainId].mETH
@@ -41,7 +45,7 @@ function App() {
   return (
     <div>
 
-      {/* Navbar */}
+      <Navbar />
 
       <main className='exchange grid'>
         <section className='exchange__section--left grid'>
