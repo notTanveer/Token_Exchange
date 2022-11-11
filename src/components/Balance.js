@@ -31,7 +31,7 @@ const Balance = () => {
   const withdrawRef = useRef(null)
 
   const tabHandler = (e) => {
-    if (e.target.className !== depositRef.current.className) {
+    if(e.target.className !== depositRef.current.className) {
       e.target.className = 'tab tab--active'
       depositRef.current.className = 'tab'
       setIsDeposit(false)
@@ -58,11 +58,13 @@ const Balance = () => {
       setToken1TransferAmount(0)
     } else {
       transferTokens(provider, exchange, 'Deposit', token, token2TransferAmount, dispatch)
+      setToken2TransferAmount(0)
     }
   }
 
   const withdrawHandler = (e, token) => {
     e.preventDefault()
+
     if (token.address === tokens[0].address) {
       transferTokens(provider, exchange, 'Withdraw', token, token1TransferAmount, dispatch)
       setToken1TransferAmount(0)
@@ -70,6 +72,8 @@ const Balance = () => {
       transferTokens(provider, exchange, 'Withdraw', token, token2TransferAmount, dispatch)
       setToken2TransferAmount(0)
     }
+
+    console.log("withrawing tokens...")
   }
 
   useEffect(() => {
@@ -108,10 +112,10 @@ const Balance = () => {
 
           <button className='button' type='submit'>
             {isDeposit ? (
-              <span>Deposit</span>
+                <span>Deposit</span>
             ) : (
-              <span>Withdraw</span>
-              )}
+                <span>Withdraw</span>
+            )}
           </button>
         </form>
       </div>
@@ -129,19 +133,20 @@ const Balance = () => {
 
         <form onSubmit={isDeposit ? (e) => depositHandler(e, tokens[1]) : (e) => withdrawHandler(e, tokens[1])}>
           <label htmlFor="token1"></label>
-          <input 
-          type="text" 
-          id='token1' 
-          placeholder='0.0000' 
-          value={token2TransferAmount === 0 ? '' : token2TransferAmount}
-          onChange={(e) => amountHandler(e, tokens[1])}/>
+          <input
+            type="text"
+            id='token1'
+            placeholder='0.0000'
+            value={token2TransferAmount === 0 ? '' : token2TransferAmount}
+            onChange={(e) => amountHandler(e, tokens[1])}
+          />
 
           <button className='button' type='submit'>
             {isDeposit ? (
-              <span>Deposit</span>
+                <span>Deposit</span>
             ) : (
-              <span>Withdraw</span>
-              )}
+                <span>Withdraw</span>
+            )}
           </button>
         </form>
       </div>
