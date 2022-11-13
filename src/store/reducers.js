@@ -232,7 +232,7 @@ export const exchange = (state = DEFAULT_EXCHANGE_STATE, action) => {
     case 'TRANSFER_REQUEST':
       return {
         ...state,
-        trasnsaction: {
+        transactions: {
           transactionType: 'Transfer',
           isPending: true,
           isSuccessful: false
